@@ -652,11 +652,7 @@ if touchScroll is false - update index
       elements = [];
       $(selector).each(function(i){
           var $this = $(this);
-          if(i>0) {
-            heights[i] = parseInt($this.offset().top) + settings.offset;
-          } else {
-            heights[i] = parseInt($this.offset().top);
-          }
+          heights[i] = i * $this.height();
           if(settings.sectionName && $this.data(settings.sectionName)) {
             names[i] = "#" + $this.data(settings.sectionName).toString().replace(/ /g,"-");
           } else {
@@ -664,9 +660,6 @@ if touchScroll is false - update index
               names[i] = "#" + (i + 1);
             } else {
               names[i] = "#";
-              if(i===$(selector).length-1 && i>1) {
-                heights[i] = heights[i-1] + (parseInt($($(selector)[i-1]).outerHeight()) - parseInt($(window).height())) + parseInt($this.outerHeight());
-              }
             }
           }
           elements[i] = $this;
